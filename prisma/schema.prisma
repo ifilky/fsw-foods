@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,32 +8,34 @@ datasource db {
 }
 
 model Restaurant {
-  id                  String     @id @default(uuid()) // criando a coluna id (primary key (@id)) e um id aleatório como default (uuid) -> caso não seja definido um id, é aplicado o default
+  id                  String     @id @default(uuid())
   name                String
-  imageURL            String
+  imageUrl            String
   deliveryFee         Decimal    @db.Decimal(10, 2)
   deliveryTimeMinutes Int
-  categories          Category[] // referência para o prisma criar uma relação de many to many para os dois models
+  categories          Category[]
   products            Product[]
 }
 
 model Category {
   id          String       @id @default(uuid())
   name        String
-  imageURL    String
-  restaurants Restaurant[] // referência para o prisma criar uma relação de many to many para os dois models
+  imageUrl    String
+  restaurants Restaurant[]
   products    Product[]
+  createdAt   DateTime     @default(now())
 }
 
 model Product {
   id                 String     @id @default(uuid())
   name               String
   description        String
-  imageURL           String
+  imageUrl           String
   price              Decimal    @db.Decimal(10, 2)
   discountPercentage Int        @default(0)
-  restaurantId       String // FK
-  restaurant         Restaurant @relation(fields: [restaurantId], references: [id]) // "este restaurantId vai referenciar o id de Restaurant" (relação entre as tabelas)
+  restaurantId       String
+  restaurant         Restaurant @relation(fields: [restaurantId], references: [id])
   categoryId         String
   category           Category   @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime     @default(now())
 }
