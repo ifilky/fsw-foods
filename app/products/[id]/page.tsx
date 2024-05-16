@@ -16,6 +16,7 @@ interface ProductPageProps {
 }
 
 const ProductPage = async ({ params: { id } }: ProductPageProps) => {
+  
   const product = await db.product.findUnique({
     where: {
       id,
@@ -25,6 +26,17 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
     },
   });
 
+  const juices = await db.product.findMany({
+    where: {
+      category: {
+        name: 'Sucos'
+      },
+    },
+    include: {
+      restaurant: true,
+    },
+  })
+
   if (!product) {
     return notFound();
   }
@@ -33,7 +45,7 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
     <div>
       <ProductImage product={product} />
 
-    <ProductDetails product={product}/>
+    <ProductDetails product={product} complementaryProducts={juices} />
     </div>
   );
 };
