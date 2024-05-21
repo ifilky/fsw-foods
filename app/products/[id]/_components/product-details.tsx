@@ -117,7 +117,7 @@ const ProductDetails = ({
 
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-1 text-muted-foreground">
-              <span className="text-xs">Tempo</span>
+              <span className="text-xs">Entrega</span>
               <TimerIcon size={14} />
             </div>
 
@@ -131,6 +131,10 @@ const ProductDetails = ({
       <div className="mt-6 space-y-3 px-5">
         <h3 className="px-5 font-semibold">Sucos</h3>
         <ProductList products={complementaryProducts} />
+      </div>
+
+      <div className="mt-6 px-5">
+        <Button className="w-full font-semibold">Adicionar à sacola</Button>
       </div>
     </div>
   );
