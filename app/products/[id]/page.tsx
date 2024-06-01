@@ -1,12 +1,6 @@
-import {
-  calculateProductTotalPrice,
-  formatCurrency,
-} from "@/app/_helpers/price";
 import { db } from "@/app/_lib/prisma";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import ProductImage from "./_components/product-image";
-import DiscountBadge from "@/app/_components/discount-badge";
 import ProductDetails from "./_components/product-details";
 
 interface ProductPageProps {
