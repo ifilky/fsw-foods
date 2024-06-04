@@ -7,6 +7,7 @@ import { ChevronRightIcon } from "lucide-react";
 import { db } from "./_lib/prisma";
 import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restautant-list";
+import Link from "next/link";
 
 const Home = async () => {
   const products = await db.product.findMany({
@@ -37,10 +38,7 @@ const Home = async () => {
       </div>
 
       <div className="px-5 pt-6">
-        <PromoBanner
-        src="/promo-banner-01.png"
-        alt="Promoção de até 30%"
-        />
+        <PromoBanner src="/promo-banner-01.png" alt="Promoção de até 30%" />
       </div>
 
       <div className="space-y-4 pt-6">
@@ -48,7 +46,7 @@ const Home = async () => {
           <h2 className="font-semibold">Pedidos recomendados</h2>
           <Button
             variant="ghost"
-            className="p-0 text-primary hover:bg-transparent h-fit"
+            className="h-fit p-0 text-primary hover:bg-transparent"
           >
             Ver todos
             <ChevronRightIcon size={16} />
@@ -58,22 +56,24 @@ const Home = async () => {
       </div>
 
       <div className="px-5 pt-6">
-      <PromoBanner
-        src="/promo-banner-02.png"
-        alt="A partir de 17,90 em lanches"
+        <PromoBanner
+          src="/promo-banner-02.png"
+          alt="A partir de 17,90 em lanches"
         />
       </div>
 
       <div className="space-y-4 py-6">
         <div className="flex items-center justify-between px-5">
           <h2 className="font-semibold">Restaurantes recomendados</h2>
-          <Button
-            variant="ghost"
-            className="p-0 text-primary hover:bg-transparent h-fit"
-          >
-            Ver todos
-            <ChevronRightIcon size={16} />
-          </Button>
+          <Link href="/restaurants/recommended">
+            <Button
+              variant="ghost"
+              className="h-fit p-0 text-primary hover:bg-transparent"
+            >
+              Ver todos
+              <ChevronRightIcon size={16} />
+            </Button>
+          </Link>
         </div>
         <RestaurantList />
       </div>
